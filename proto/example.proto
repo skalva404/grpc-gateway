@@ -5,6 +5,7 @@ package example;
 import "google/api/annotations.proto";
 import "protoc-gen-swagger/options/annotations.proto";
 
+//    https://pdoviet.wordpress.com/2017/03/06/a-simple-api-using-protobuf-and-grpc/
 // Defines the import path that should be used to import the generated package,
 // and the package name.
 option go_package = "github.com/grpc-gateway/proto;example";
@@ -67,8 +68,10 @@ message ListUsersRequest {}
 
 message ListUserIdRequest {
   string id = 1;
+  string name = 2;
 }
 
 message User {
   string id = 1;
+  string name = 2;
 }
