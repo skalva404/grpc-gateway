@@ -1,4 +1,8 @@
-# grpc-gateway-boilerplate
+# grpc-gateway
+
+This helps you provide your APIs in both gRPC and RESTful style at the same time.
+
+![architecture introduction diagram](https://docs.google.com/drawings/d/12hp4CPqrNPFhattL_cIoJptFvlAqm5wLQ0ggqI5mkCg/pub?w=749&amp;h=370)
 
 [![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/grpc-gateway.git)
 
