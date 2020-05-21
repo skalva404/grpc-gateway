@@ -1,4 +1,4 @@
-syntax="proto3";
+syntax = "proto3";
 
 package example;
 
@@ -22,56 +22,65 @@ option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
   schemes: HTTP;
 };
 
-service UserService {
+service DeInfoService {
 
-  rpc AddUser(AddUserRequest) returns (User) {
+  rpc AddDeInfo(DeInfo) returns (DeInfo) {
     option (google.api.http) = {
-      // Route to this method from POST requests to /api/v1/users
-      post: "/api/v1/users"
+      post: "/api/v1/deinfo"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
-      summary: "Add a user"
-      description: "Add a user to the server."
-      tags: "Users"
+      summary: "Add a DeInfo"
+      description: "Add a DeInfo to the server."
+      tags: "DeInfos"
     };
   }
 
-  rpc ListUsers(ListUsersRequest) returns (stream User) {
+  rpc ListDeInfos(Empty) returns (stream DeInfo) {
     option (google.api.http) = {
       // Route to this method from GET requests to /api/v1/users
-      get: "/api/v1/listusers"
+      get: "/api/v1/listdeinfos"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
-      summary: "List users"
-      description: "List all users on the server."
-      tags: "Users"
+      summary: "List DeInfo"
+      description: "List all DeInfo on the server."
+      tags: "DeInfos"
     };
   }
 
-  rpc GetUser(ListUserIdRequest) returns (stream User) {
+  rpc GetDeInfo(GetDeInfoRequest) returns (stream DeInfo) {
     option (google.api.http) = {
       // Route to this method from GET requests to /api/v1/users
-      get: "/api/v1/getuser/{id}"
+      get: "/api/v1/getdeinfo/{id}"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
-      summary: "List users"
-      description: "List all users on the server."
-      tags: "Users"
+      summary: "List DeInfo"
+      description: "List DeInfo on the server."
+      tags: "DeInfo"
     };
   }
 }
 
-message AddUserRequest {}
-
-message ListUsersRequest {}
-
-message ListUserIdRequest {
+message GetDeInfoRequest {
   string id = 1;
-  string name = 2;
 }
 
-message User {
-  string id = 1;
+message Empty {
+
+}
+message DeInfo {
+  int64 id = 1;
   string name = 2;
+  int32 zoneId = 3;
+  string empStatus = 4;
+  string deType = 5;
+  bool inShift = 6;
+  bool isBicycle = 7;
+  Address adress = 8;
+}
+
+message Address {
+  string address1 = 1;
+  string address2 = 2;
+  string city = 3;
 }

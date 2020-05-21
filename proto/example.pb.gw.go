@@ -31,8 +31,8 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = descriptor.ForMessage
 
-func request_UserService_AddUser_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq AddUserRequest
+func request_DeInfoService_AddDeInfo_0(ctx context.Context, marshaler runtime.Marshaler, client DeInfoServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DeInfo
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -43,13 +43,13 @@ func request_UserService_AddUser_0(ctx context.Context, marshaler runtime.Marsha
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.AddUser(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.AddDeInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_UserService_AddUser_0(ctx context.Context, marshaler runtime.Marshaler, server UserServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq AddUserRequest
+func local_request_DeInfoService_AddDeInfo_0(ctx context.Context, marshaler runtime.Marshaler, server DeInfoServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DeInfo
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -60,16 +60,16 @@ func local_request_UserService_AddUser_0(ctx context.Context, marshaler runtime.
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.AddUser(ctx, &protoReq)
+	msg, err := server.AddDeInfo(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_UserService_ListUsers_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (UserService_ListUsersClient, runtime.ServerMetadata, error) {
-	var protoReq ListUsersRequest
+func request_DeInfoService_ListDeInfos_0(ctx context.Context, marshaler runtime.Marshaler, client DeInfoServiceClient, req *http.Request, pathParams map[string]string) (DeInfoService_ListDeInfosClient, runtime.ServerMetadata, error) {
+	var protoReq Empty
 	var metadata runtime.ServerMetadata
 
-	stream, err := client.ListUsers(ctx, &protoReq)
+	stream, err := client.ListDeInfos(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -82,12 +82,8 @@ func request_UserService_ListUsers_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-var (
-	filter_UserService_GetUser_0 = &utilities.DoubleArray{Encoding: map[string]int{"id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
-)
-
-func request_UserService_GetUser_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (UserService_GetUserClient, runtime.ServerMetadata, error) {
-	var protoReq ListUserIdRequest
+func request_DeInfoService_GetDeInfo_0(ctx context.Context, marshaler runtime.Marshaler, client DeInfoServiceClient, req *http.Request, pathParams map[string]string) (DeInfoService_GetDeInfoClient, runtime.ServerMetadata, error) {
+	var protoReq GetDeInfoRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -108,14 +104,7 @@ func request_UserService_GetUser_0(ctx context.Context, marshaler runtime.Marsha
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_UserService_GetUser_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	stream, err := client.GetUser(ctx, &protoReq)
+	stream, err := client.GetDeInfo(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -128,12 +117,12 @@ func request_UserService_GetUser_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-// RegisterUserServiceHandlerServer registers the http handlers for service UserService to "mux".
-// UnaryRPC     :call UserServiceServer directly.
+// RegisterDeInfoServiceHandlerServer registers the http handlers for service DeInfoService to "mux".
+// UnaryRPC     :call DeInfoServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-func RegisterUserServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server UserServiceServer) error {
+func RegisterDeInfoServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server DeInfoServiceServer) error {
 
-	mux.Handle("POST", pattern_UserService_AddUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_DeInfoService_AddDeInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -142,25 +131,25 @@ func RegisterUserServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_UserService_AddUser_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_DeInfoService_AddDeInfo_0(rctx, inboundMarshaler, server, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_UserService_AddUser_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_DeInfoService_AddDeInfo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_UserService_ListUsers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_DeInfoService_ListDeInfos_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("GET", pattern_UserService_GetUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_DeInfoService_GetDeInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -170,9 +159,9 @@ func RegisterUserServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 	return nil
 }
 
-// RegisterUserServiceHandlerFromEndpoint is same as RegisterUserServiceHandler but
+// RegisterDeInfoServiceHandlerFromEndpoint is same as RegisterDeInfoServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterUserServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterDeInfoServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -192,23 +181,23 @@ func RegisterUserServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.Se
 		}()
 	}()
 
-	return RegisterUserServiceHandler(ctx, mux, conn)
+	return RegisterDeInfoServiceHandler(ctx, mux, conn)
 }
 
-// RegisterUserServiceHandler registers the http handlers for service UserService to "mux".
+// RegisterDeInfoServiceHandler registers the http handlers for service DeInfoService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterUserServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterUserServiceHandlerClient(ctx, mux, NewUserServiceClient(conn))
+func RegisterDeInfoServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterDeInfoServiceHandlerClient(ctx, mux, NewDeInfoServiceClient(conn))
 }
 
-// RegisterUserServiceHandlerClient registers the http handlers for service UserService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "UserServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "UserServiceClient"
+// RegisterDeInfoServiceHandlerClient registers the http handlers for service DeInfoService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "DeInfoServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "DeInfoServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "UserServiceClient" to call the correct interceptors.
-func RegisterUserServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client UserServiceClient) error {
+// "DeInfoServiceClient" to call the correct interceptors.
+func RegisterDeInfoServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client DeInfoServiceClient) error {
 
-	mux.Handle("POST", pattern_UserService_AddUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_DeInfoService_AddDeInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -217,18 +206,18 @@ func RegisterUserServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_UserService_AddUser_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_DeInfoService_AddDeInfo_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_UserService_AddUser_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_DeInfoService_AddDeInfo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_UserService_ListUsers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_DeInfoService_ListDeInfos_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -237,18 +226,18 @@ func RegisterUserServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_UserService_ListUsers_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_DeInfoService_ListDeInfos_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_UserService_ListUsers_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_DeInfoService_ListDeInfos_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_UserService_GetUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_DeInfoService_GetDeInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -257,14 +246,14 @@ func RegisterUserServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_UserService_GetUser_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_DeInfoService_GetDeInfo_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_UserService_GetUser_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_DeInfoService_GetDeInfo_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -272,17 +261,17 @@ func RegisterUserServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_UserService_AddUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "users"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_DeInfoService_AddDeInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "deinfo"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_UserService_ListUsers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "listusers"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_DeInfoService_ListDeInfos_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "listdeinfos"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_UserService_GetUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "getuser", "id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_DeInfoService_GetDeInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "getdeinfo", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (
-	forward_UserService_AddUser_0 = runtime.ForwardResponseMessage
+	forward_DeInfoService_AddDeInfo_0 = runtime.ForwardResponseMessage
 
-	forward_UserService_ListUsers_0 = runtime.ForwardResponseStream
+	forward_DeInfoService_ListDeInfos_0 = runtime.ForwardResponseStream
 
-	forward_UserService_GetUser_0 = runtime.ForwardResponseStream
+	forward_DeInfoService_GetDeInfo_0 = runtime.ForwardResponseStream
 )

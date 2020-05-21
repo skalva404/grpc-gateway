@@ -31,14 +31,16 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type AddUserRequest struct {
+type GetDeInfoRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *AddUserRequest) Reset() {
-	*x = AddUserRequest{}
+func (x *GetDeInfoRequest) Reset() {
+	*x = GetDeInfoRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_example_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -46,13 +48,13 @@ func (x *AddUserRequest) Reset() {
 	}
 }
 
-func (x *AddUserRequest) String() string {
+func (x *GetDeInfoRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddUserRequest) ProtoMessage() {}
+func (*GetDeInfoRequest) ProtoMessage() {}
 
-func (x *AddUserRequest) ProtoReflect() protoreflect.Message {
+func (x *GetDeInfoRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_example_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64,19 +66,26 @@ func (x *AddUserRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddUserRequest.ProtoReflect.Descriptor instead.
-func (*AddUserRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDeInfoRequest.ProtoReflect.Descriptor instead.
+func (*GetDeInfoRequest) Descriptor() ([]byte, []int) {
 	return file_example_proto_rawDescGZIP(), []int{0}
 }
 
-type ListUsersRequest struct {
+func (x *GetDeInfoRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type Empty struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *ListUsersRequest) Reset() {
-	*x = ListUsersRequest{}
+func (x *Empty) Reset() {
+	*x = Empty{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_example_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -84,13 +93,13 @@ func (x *ListUsersRequest) Reset() {
 	}
 }
 
-func (x *ListUsersRequest) String() string {
+func (x *Empty) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListUsersRequest) ProtoMessage() {}
+func (*Empty) ProtoMessage() {}
 
-func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
+func (x *Empty) ProtoReflect() protoreflect.Message {
 	mi := &file_example_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -102,22 +111,28 @@ func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListUsersRequest.ProtoReflect.Descriptor instead.
-func (*ListUsersRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
+func (*Empty) Descriptor() ([]byte, []int) {
 	return file_example_proto_rawDescGZIP(), []int{1}
 }
 
-type ListUserIdRequest struct {
+type DeInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id   string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Id        int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name      string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ZoneId    int32    `protobuf:"varint,3,opt,name=zoneId,proto3" json:"zoneId,omitempty"`
+	EmpStatus string   `protobuf:"bytes,4,opt,name=empStatus,proto3" json:"empStatus,omitempty"`
+	DeType    string   `protobuf:"bytes,5,opt,name=deType,proto3" json:"deType,omitempty"`
+	InShift   bool     `protobuf:"varint,6,opt,name=inShift,proto3" json:"inShift,omitempty"`
+	IsBicycle bool     `protobuf:"varint,7,opt,name=isBicycle,proto3" json:"isBicycle,omitempty"`
+	Adress    *Address `protobuf:"bytes,8,opt,name=adress,proto3" json:"adress,omitempty"`
 }
 
-func (x *ListUserIdRequest) Reset() {
-	*x = ListUserIdRequest{}
+func (x *DeInfo) Reset() {
+	*x = DeInfo{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_example_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -125,13 +140,13 @@ func (x *ListUserIdRequest) Reset() {
 	}
 }
 
-func (x *ListUserIdRequest) String() string {
+func (x *DeInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListUserIdRequest) ProtoMessage() {}
+func (*DeInfo) ProtoMessage() {}
 
-func (x *ListUserIdRequest) ProtoReflect() protoreflect.Message {
+func (x *DeInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_example_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -143,36 +158,79 @@ func (x *ListUserIdRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListUserIdRequest.ProtoReflect.Descriptor instead.
-func (*ListUserIdRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeInfo.ProtoReflect.Descriptor instead.
+func (*DeInfo) Descriptor() ([]byte, []int) {
 	return file_example_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListUserIdRequest) GetId() string {
+func (x *DeInfo) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
-func (x *ListUserIdRequest) GetName() string {
+func (x *DeInfo) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-type User struct {
+func (x *DeInfo) GetZoneId() int32 {
+	if x != nil {
+		return x.ZoneId
+	}
+	return 0
+}
+
+func (x *DeInfo) GetEmpStatus() string {
+	if x != nil {
+		return x.EmpStatus
+	}
+	return ""
+}
+
+func (x *DeInfo) GetDeType() string {
+	if x != nil {
+		return x.DeType
+	}
+	return ""
+}
+
+func (x *DeInfo) GetInShift() bool {
+	if x != nil {
+		return x.InShift
+	}
+	return false
+}
+
+func (x *DeInfo) GetIsBicycle() bool {
+	if x != nil {
+		return x.IsBicycle
+	}
+	return false
+}
+
+func (x *DeInfo) GetAdress() *Address {
+	if x != nil {
+		return x.Adress
+	}
+	return nil
+}
+
+type Address struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id   string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Address1 string `protobuf:"bytes,1,opt,name=address1,proto3" json:"address1,omitempty"`
+	Address2 string `protobuf:"bytes,2,opt,name=address2,proto3" json:"address2,omitempty"`
+	City     string `protobuf:"bytes,3,opt,name=city,proto3" json:"city,omitempty"`
 }
 
-func (x *User) Reset() {
-	*x = User{}
+func (x *Address) Reset() {
+	*x = Address{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_example_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -180,13 +238,13 @@ func (x *User) Reset() {
 	}
 }
 
-func (x *User) String() string {
+func (x *Address) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*User) ProtoMessage() {}
+func (*Address) ProtoMessage() {}
 
-func (x *User) ProtoReflect() protoreflect.Message {
+func (x *Address) ProtoReflect() protoreflect.Message {
 	mi := &file_example_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -198,21 +256,28 @@ func (x *User) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use User.ProtoReflect.Descriptor instead.
-func (*User) Descriptor() ([]byte, []int) {
+// Deprecated: Use Address.ProtoReflect.Descriptor instead.
+func (*Address) Descriptor() ([]byte, []int) {
 	return file_example_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *User) GetId() string {
+func (x *Address) GetAddress1() string {
 	if x != nil {
-		return x.Id
+		return x.Address1
 	}
 	return ""
 }
 
-func (x *User) GetName() string {
+func (x *Address) GetAddress2() string {
 	if x != nil {
-		return x.Name
+		return x.Address2
+	}
+	return ""
+}
+
+func (x *Address) GetCity() string {
+	if x != nil {
+		return x.City
 	}
 	return ""
 }
@@ -226,41 +291,55 @@ var file_example_proto_rawDesc = []byte{
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x2c, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x2d, 0x67,
 	0x65, 0x6e, 0x2d, 0x73, 0x77, 0x61, 0x67, 0x67, 0x65, 0x72, 0x2f, 0x6f, 0x70, 0x74, 0x69, 0x6f,
 	0x6e, 0x73, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x10, 0x0a, 0x0e, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x12, 0x0a, 0x10, 0x4c, 0x69, 0x73, 0x74, 0x55, 0x73,
-	0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x37, 0x0a, 0x11, 0x4c, 0x69,
-	0x73, 0x74, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12,
-	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x22, 0x2a, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x32,
-	0xa1, 0x03, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
-	0x7c, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72, 0x12, 0x17, 0x2e, 0x65, 0x78, 0x61,
-	0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x55, 0x73,
-	0x65, 0x72, 0x22, 0x49, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x12, 0x22, 0x0d, 0x2f, 0x61, 0x70, 0x69,
-	0x2f, 0x76, 0x31, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x73, 0x3a, 0x01, 0x2a, 0x92, 0x41, 0x2e, 0x0a,
-	0x05, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x0a, 0x41, 0x64, 0x64, 0x20, 0x61, 0x20, 0x75, 0x73,
-	0x65, 0x72, 0x1a, 0x19, 0x41, 0x64, 0x64, 0x20, 0x61, 0x20, 0x75, 0x73, 0x65, 0x72, 0x20, 0x74,
-	0x6f, 0x20, 0x74, 0x68, 0x65, 0x20, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x12, 0x87, 0x01,
-	0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x19, 0x2e, 0x65, 0x78,
-	0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x55, 0x73, 0x65, 0x72, 0x73, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
-	0x2e, 0x55, 0x73, 0x65, 0x72, 0x22, 0x4e, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x13, 0x12, 0x11, 0x2f,
-	0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x69, 0x73, 0x74, 0x75, 0x73, 0x65, 0x72, 0x73,
-	0x92, 0x41, 0x32, 0x0a, 0x05, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x0a, 0x4c, 0x69, 0x73, 0x74,
-	0x20, 0x75, 0x73, 0x65, 0x72, 0x73, 0x1a, 0x1d, 0x4c, 0x69, 0x73, 0x74, 0x20, 0x61, 0x6c, 0x6c,
-	0x20, 0x75, 0x73, 0x65, 0x72, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20, 0x73, 0x65,
-	0x72, 0x76, 0x65, 0x72, 0x2e, 0x30, 0x01, 0x12, 0x89, 0x01, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x55,
-	0x73, 0x65, 0x72, 0x12, 0x1a, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x4c, 0x69,
-	0x73, 0x74, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x0d, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x22, 0x51,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x12, 0x14, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f,
-	0x67, 0x65, 0x74, 0x75, 0x73, 0x65, 0x72, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x92, 0x41, 0x32, 0x0a,
-	0x05, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x20, 0x75, 0x73, 0x65,
-	0x72, 0x73, 0x1a, 0x1d, 0x4c, 0x69, 0x73, 0x74, 0x20, 0x61, 0x6c, 0x6c, 0x20, 0x75, 0x73, 0x65,
-	0x72, 0x73, 0x20, 0x6f, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72,
+	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x22, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x44, 0x65, 0x49, 0x6e, 0x66,
+	0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x07, 0x0a, 0x05, 0x45, 0x6d, 0x70, 0x74,
+	0x79, 0x22, 0xdc, 0x01, 0x0a, 0x06, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x12, 0x16, 0x0a, 0x06, 0x7a, 0x6f, 0x6e, 0x65, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x06, 0x7a, 0x6f, 0x6e, 0x65, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x65, 0x6d, 0x70, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x65, 0x6d, 0x70,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x69, 0x6e, 0x53, 0x68, 0x69, 0x66, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x07, 0x69, 0x6e, 0x53, 0x68, 0x69, 0x66, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x69, 0x73, 0x42, 0x69,
+	0x63, 0x79, 0x63, 0x6c, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x69, 0x73, 0x42,
+	0x69, 0x63, 0x79, 0x63, 0x6c, 0x65, 0x12, 0x28, 0x0a, 0x06, 0x61, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
+	0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x52, 0x06, 0x61, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x22, 0x55, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x31, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x31, 0x12, 0x1a, 0x0a, 0x08, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x32, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x32, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x69, 0x74, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x63, 0x69, 0x74, 0x79, 0x32, 0xa9, 0x03, 0x0a, 0x0d, 0x44, 0x65, 0x49, 0x6e,
+	0x66, 0x6f, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x7f, 0x0a, 0x09, 0x41, 0x64, 0x64,
+	0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x0f, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
+	0x2e, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x1a, 0x0f, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c,
+	0x65, 0x2e, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x50, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x13,
+	0x22, 0x0e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x64, 0x65, 0x69, 0x6e, 0x66, 0x6f,
+	0x3a, 0x01, 0x2a, 0x92, 0x41, 0x34, 0x0a, 0x07, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x73, 0x12,
+	0x0c, 0x41, 0x64, 0x64, 0x20, 0x61, 0x20, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x1a, 0x1b, 0x41,
+	0x64, 0x64, 0x20, 0x61, 0x20, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x20, 0x74, 0x6f, 0x20, 0x74,
+	0x68, 0x65, 0x20, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x12, 0x86, 0x01, 0x0a, 0x0b, 0x4c,
+	0x69, 0x73, 0x74, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x73, 0x12, 0x0e, 0x2e, 0x65, 0x78, 0x61,
+	0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x0f, 0x2e, 0x65, 0x78, 0x61,
+	0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x54, 0x82, 0xd3, 0xe4,
+	0x93, 0x02, 0x15, 0x12, 0x13, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x69, 0x73,
+	0x74, 0x64, 0x65, 0x69, 0x6e, 0x66, 0x6f, 0x73, 0x92, 0x41, 0x36, 0x0a, 0x07, 0x44, 0x65, 0x49,
+	0x6e, 0x66, 0x6f, 0x73, 0x12, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x20, 0x44, 0x65, 0x49, 0x6e, 0x66,
+	0x6f, 0x1a, 0x1e, 0x4c, 0x69, 0x73, 0x74, 0x20, 0x61, 0x6c, 0x6c, 0x20, 0x44, 0x65, 0x49, 0x6e,
+	0x66, 0x6f, 0x20, 0x6f, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72,
+	0x2e, 0x30, 0x01, 0x12, 0x8d, 0x01, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x44, 0x65, 0x49, 0x6e, 0x66,
+	0x6f, 0x12, 0x19, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x44,
+	0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0f, 0x2e, 0x65,
+	0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x52, 0x82,
+	0xd3, 0xe4, 0x93, 0x02, 0x18, 0x12, 0x16, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x67,
+	0x65, 0x74, 0x64, 0x65, 0x69, 0x6e, 0x66, 0x6f, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x92, 0x41, 0x31,
+	0x0a, 0x06, 0x44, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x20, 0x44,
+	0x65, 0x49, 0x6e, 0x66, 0x6f, 0x1a, 0x1a, 0x4c, 0x69, 0x73, 0x74, 0x20, 0x44, 0x65, 0x49, 0x6e,
+	0x66, 0x6f, 0x20, 0x6f, 0x6e, 0x20, 0x74, 0x68, 0x65, 0x20, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72,
 	0x2e, 0x30, 0x01, 0x42, 0x7b, 0x5a, 0x25, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
 	0x6d, 0x2f, 0x67, 0x72, 0x70, 0x63, 0x2d, 0x67, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2f, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x3b, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x92, 0x41, 0x51, 0x12,
@@ -286,23 +365,24 @@ func file_example_proto_rawDescGZIP() []byte {
 
 var file_example_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_example_proto_goTypes = []interface{}{
-	(*AddUserRequest)(nil),    // 0: example.AddUserRequest
-	(*ListUsersRequest)(nil),  // 1: example.ListUsersRequest
-	(*ListUserIdRequest)(nil), // 2: example.ListUserIdRequest
-	(*User)(nil),              // 3: example.User
+	(*GetDeInfoRequest)(nil), // 0: example.GetDeInfoRequest
+	(*Empty)(nil),            // 1: example.Empty
+	(*DeInfo)(nil),           // 2: example.DeInfo
+	(*Address)(nil),          // 3: example.Address
 }
 var file_example_proto_depIdxs = []int32{
-	0, // 0: example.UserService.AddUser:input_type -> example.AddUserRequest
-	1, // 1: example.UserService.ListUsers:input_type -> example.ListUsersRequest
-	2, // 2: example.UserService.GetUser:input_type -> example.ListUserIdRequest
-	3, // 3: example.UserService.AddUser:output_type -> example.User
-	3, // 4: example.UserService.ListUsers:output_type -> example.User
-	3, // 5: example.UserService.GetUser:output_type -> example.User
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: example.DeInfo.adress:type_name -> example.Address
+	2, // 1: example.DeInfoService.AddDeInfo:input_type -> example.DeInfo
+	1, // 2: example.DeInfoService.ListDeInfos:input_type -> example.Empty
+	0, // 3: example.DeInfoService.GetDeInfo:input_type -> example.GetDeInfoRequest
+	2, // 4: example.DeInfoService.AddDeInfo:output_type -> example.DeInfo
+	2, // 5: example.DeInfoService.ListDeInfos:output_type -> example.DeInfo
+	2, // 6: example.DeInfoService.GetDeInfo:output_type -> example.DeInfo
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_example_proto_init() }
@@ -312,7 +392,7 @@ func file_example_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_example_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddUserRequest); i {
+			switch v := v.(*GetDeInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -324,7 +404,7 @@ func file_example_proto_init() {
 			}
 		}
 		file_example_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListUsersRequest); i {
+			switch v := v.(*Empty); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -336,7 +416,7 @@ func file_example_proto_init() {
 			}
 		}
 		file_example_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListUserIdRequest); i {
+			switch v := v.(*DeInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -348,7 +428,7 @@ func file_example_proto_init() {
 			}
 		}
 		file_example_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*User); i {
+			switch v := v.(*Address); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -388,38 +468,38 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// UserServiceClient is the client API for UserService service.
+// DeInfoServiceClient is the client API for DeInfoService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type UserServiceClient interface {
-	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*User, error)
-	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (UserService_ListUsersClient, error)
-	GetUser(ctx context.Context, in *ListUserIdRequest, opts ...grpc.CallOption) (UserService_GetUserClient, error)
+type DeInfoServiceClient interface {
+	AddDeInfo(ctx context.Context, in *DeInfo, opts ...grpc.CallOption) (*DeInfo, error)
+	ListDeInfos(ctx context.Context, in *Empty, opts ...grpc.CallOption) (DeInfoService_ListDeInfosClient, error)
+	GetDeInfo(ctx context.Context, in *GetDeInfoRequest, opts ...grpc.CallOption) (DeInfoService_GetDeInfoClient, error)
 }
 
-type userServiceClient struct {
+type deInfoServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
-	return &userServiceClient{cc}
+func NewDeInfoServiceClient(cc grpc.ClientConnInterface) DeInfoServiceClient {
+	return &deInfoServiceClient{cc}
 }
 
-func (c *userServiceClient) AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*User, error) {
-	out := new(User)
-	err := c.cc.Invoke(ctx, "/example.UserService/AddUser", in, out, opts...)
+func (c *deInfoServiceClient) AddDeInfo(ctx context.Context, in *DeInfo, opts ...grpc.CallOption) (*DeInfo, error) {
+	out := new(DeInfo)
+	err := c.cc.Invoke(ctx, "/example.DeInfoService/AddDeInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (UserService_ListUsersClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_UserService_serviceDesc.Streams[0], "/example.UserService/ListUsers", opts...)
+func (c *deInfoServiceClient) ListDeInfos(ctx context.Context, in *Empty, opts ...grpc.CallOption) (DeInfoService_ListDeInfosClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_DeInfoService_serviceDesc.Streams[0], "/example.DeInfoService/ListDeInfos", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &userServiceListUsersClient{stream}
+	x := &deInfoServiceListDeInfosClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -429,29 +509,29 @@ func (c *userServiceClient) ListUsers(ctx context.Context, in *ListUsersRequest,
 	return x, nil
 }
 
-type UserService_ListUsersClient interface {
-	Recv() (*User, error)
+type DeInfoService_ListDeInfosClient interface {
+	Recv() (*DeInfo, error)
 	grpc.ClientStream
 }
 
-type userServiceListUsersClient struct {
+type deInfoServiceListDeInfosClient struct {
 	grpc.ClientStream
 }
 
-func (x *userServiceListUsersClient) Recv() (*User, error) {
-	m := new(User)
+func (x *deInfoServiceListDeInfosClient) Recv() (*DeInfo, error) {
+	m := new(DeInfo)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *userServiceClient) GetUser(ctx context.Context, in *ListUserIdRequest, opts ...grpc.CallOption) (UserService_GetUserClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_UserService_serviceDesc.Streams[1], "/example.UserService/GetUser", opts...)
+func (c *deInfoServiceClient) GetDeInfo(ctx context.Context, in *GetDeInfoRequest, opts ...grpc.CallOption) (DeInfoService_GetDeInfoClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_DeInfoService_serviceDesc.Streams[1], "/example.DeInfoService/GetDeInfo", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &userServiceGetUserClient{stream}
+	x := &deInfoServiceGetDeInfoClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -461,126 +541,126 @@ func (c *userServiceClient) GetUser(ctx context.Context, in *ListUserIdRequest, 
 	return x, nil
 }
 
-type UserService_GetUserClient interface {
-	Recv() (*User, error)
+type DeInfoService_GetDeInfoClient interface {
+	Recv() (*DeInfo, error)
 	grpc.ClientStream
 }
 
-type userServiceGetUserClient struct {
+type deInfoServiceGetDeInfoClient struct {
 	grpc.ClientStream
 }
 
-func (x *userServiceGetUserClient) Recv() (*User, error) {
-	m := new(User)
+func (x *deInfoServiceGetDeInfoClient) Recv() (*DeInfo, error) {
+	m := new(DeInfo)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-// UserServiceServer is the server API for UserService service.
-type UserServiceServer interface {
-	AddUser(context.Context, *AddUserRequest) (*User, error)
-	ListUsers(*ListUsersRequest, UserService_ListUsersServer) error
-	GetUser(*ListUserIdRequest, UserService_GetUserServer) error
+// DeInfoServiceServer is the server API for DeInfoService service.
+type DeInfoServiceServer interface {
+	AddDeInfo(context.Context, *DeInfo) (*DeInfo, error)
+	ListDeInfos(*Empty, DeInfoService_ListDeInfosServer) error
+	GetDeInfo(*GetDeInfoRequest, DeInfoService_GetDeInfoServer) error
 }
 
-// UnimplementedUserServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedUserServiceServer struct {
+// UnimplementedDeInfoServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedDeInfoServiceServer struct {
 }
 
-func (*UnimplementedUserServiceServer) AddUser(context.Context, *AddUserRequest) (*User, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
+func (*UnimplementedDeInfoServiceServer) AddDeInfo(context.Context, *DeInfo) (*DeInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDeInfo not implemented")
 }
-func (*UnimplementedUserServiceServer) ListUsers(*ListUsersRequest, UserService_ListUsersServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
+func (*UnimplementedDeInfoServiceServer) ListDeInfos(*Empty, DeInfoService_ListDeInfosServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListDeInfos not implemented")
 }
-func (*UnimplementedUserServiceServer) GetUser(*ListUserIdRequest, UserService_GetUserServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetUser not implemented")
-}
-
-func RegisterUserServiceServer(s *grpc.Server, srv UserServiceServer) {
-	s.RegisterService(&_UserService_serviceDesc, srv)
+func (*UnimplementedDeInfoServiceServer) GetDeInfo(*GetDeInfoRequest, DeInfoService_GetDeInfoServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetDeInfo not implemented")
 }
 
-func _UserService_AddUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddUserRequest)
+func RegisterDeInfoServiceServer(s *grpc.Server, srv DeInfoServiceServer) {
+	s.RegisterService(&_DeInfoService_serviceDesc, srv)
+}
+
+func _DeInfoService_AddDeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeInfo)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).AddUser(ctx, in)
+		return srv.(DeInfoServiceServer).AddDeInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/example.UserService/AddUser",
+		FullMethod: "/example.DeInfoService/AddDeInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).AddUser(ctx, req.(*AddUserRequest))
+		return srv.(DeInfoServiceServer).AddDeInfo(ctx, req.(*DeInfo))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_ListUsers_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListUsersRequest)
+func _DeInfoService_ListDeInfos_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Empty)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(UserServiceServer).ListUsers(m, &userServiceListUsersServer{stream})
+	return srv.(DeInfoServiceServer).ListDeInfos(m, &deInfoServiceListDeInfosServer{stream})
 }
 
-type UserService_ListUsersServer interface {
-	Send(*User) error
+type DeInfoService_ListDeInfosServer interface {
+	Send(*DeInfo) error
 	grpc.ServerStream
 }
 
-type userServiceListUsersServer struct {
+type deInfoServiceListDeInfosServer struct {
 	grpc.ServerStream
 }
 
-func (x *userServiceListUsersServer) Send(m *User) error {
+func (x *deInfoServiceListDeInfosServer) Send(m *DeInfo) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _UserService_GetUser_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListUserIdRequest)
+func _DeInfoService_GetDeInfo_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetDeInfoRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(UserServiceServer).GetUser(m, &userServiceGetUserServer{stream})
+	return srv.(DeInfoServiceServer).GetDeInfo(m, &deInfoServiceGetDeInfoServer{stream})
 }
 
-type UserService_GetUserServer interface {
-	Send(*User) error
+type DeInfoService_GetDeInfoServer interface {
+	Send(*DeInfo) error
 	grpc.ServerStream
 }
 
-type userServiceGetUserServer struct {
+type deInfoServiceGetDeInfoServer struct {
 	grpc.ServerStream
 }
 
-func (x *userServiceGetUserServer) Send(m *User) error {
+func (x *deInfoServiceGetDeInfoServer) Send(m *DeInfo) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-var _UserService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "example.UserService",
-	HandlerType: (*UserServiceServer)(nil),
+var _DeInfoService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "example.DeInfoService",
+	HandlerType: (*DeInfoServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddUser",
-			Handler:    _UserService_AddUser_Handler,
+			MethodName: "AddDeInfo",
+			Handler:    _DeInfoService_AddDeInfo_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "ListUsers",
-			Handler:       _UserService_ListUsers_Handler,
+			StreamName:    "ListDeInfos",
+			Handler:       _DeInfoService_ListDeInfos_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "GetUser",
-			Handler:       _UserService_GetUser_Handler,
+			StreamName:    "GetDeInfo",
+			Handler:       _DeInfoService_GetDeInfo_Handler,
 			ServerStreams: true,
 		},
 	},

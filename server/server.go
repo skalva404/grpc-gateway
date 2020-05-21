@@ -2,17 +2,18 @@ package server
 
 import (
   "context"
+  "strconv"
   "sync"
-
-  "github.com/gofrs/uuid"
 
   pbExample "github.com/grpc-gateway/proto"
 )
 
+var counter int64 = 0
+
 // Backend implements the protobuf interface
 type Backend struct {
-  mu    *sync.RWMutex
-  users []*pbExample.User
+  mu      *sync.RWMutex
+  deinfos []*pbExample.DeInfo
 }
 
 // New initializes a new Backend struct.
@@ -23,25 +24,21 @@ func New() *Backend {
 }
 
 // AddUser adds a user to the in-memory store.
-func (b *Backend) AddUser(ctx context.Context, _ *pbExample.AddUserRequest) (*pbExample.User, error) {
+func (b *Backend) AddDeInfo(ctx context.Context, deinfo *pbExample.DeInfo) (*pbExample.DeInfo, error) {
   b.mu.Lock()
   defer b.mu.Unlock()
-
-  user := &pbExample.User{
-	Id:   uuid.Must(uuid.NewV4()).String(),
-	Name: uuid.Must(uuid.NewV4()).String(),
-  }
-  b.users = append(b.users, user)
-  return user, nil
+  counter++
+  deinfo.Id = counter
+  b.deinfos = append(b.deinfos, deinfo)
+  return deinfo, nil
 }
 
-// ListUsers lists all users in the store.
-func (b *Backend) ListUsers(_ *pbExample.ListUsersRequest, srv pbExample.UserService_ListUsersServer) error {
+func (b *Backend) ListDeInfos(_ *pbExample.Empty, srv pbExample.DeInfoService_ListDeInfosServer) error {
   b.mu.RLock()
   defer b.mu.RUnlock()
 
-  for _, user := range b.users {
-	err := srv.Send(user)
+  for _, deinfo := range b.deinfos {
+	err := srv.Send(deinfo)
 	if err != nil {
 	  return err
 	}
@@ -50,14 +47,16 @@ func (b *Backend) ListUsers(_ *pbExample.ListUsersRequest, srv pbExample.UserSer
 }
 
 // ListUsers lists all users in the store.
-func (b *Backend) GetUser(req *pbExample.ListUserIdRequest, srv pbExample.UserService_GetUserServer) error {
+func (b *Backend) GetDeInfo(req *pbExample.GetDeInfoRequest, srv pbExample.DeInfoService_GetDeInfoServer) error {
   b.mu.RLock()
   defer b.mu.RUnlock()
 
-  for _, user := range b.users {
-	if req.Id == user.Id {
-	  println("Data found = " + user.String())
-	  err := srv.Send(user)
+  for _, deinfo := range b.deinfos {
+	deid, _ := strconv.ParseInt(req.Id, 10, 64)
+	var did int64 = deid
+	if did == deinfo.Id {
+	  println("Data found = " + deinfo.String())
+	  err := srv.Send(deinfo)
 	  if err != nil {
 		return err
 	  }

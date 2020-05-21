@@ -14,96 +14,16 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/getuser/{id}": {
-      "get": {
-        "summary": "List users",
-        "description": "List all users on the server.",
-        "operationId": "UserService_GetUser",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/exampleUser"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of exampleUser"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Users"
-        ]
-      }
-    },
-    "/api/v1/listusers": {
-      "get": {
-        "summary": "List users",
-        "description": "List all users on the server.",
-        "operationId": "UserService_ListUsers",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/exampleUser"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of exampleUser"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "tags": [
-          "Users"
-        ]
-      }
-    },
-    "/api/v1/users": {
+    "/api/v1/deinfo": {
       "post": {
-        "summary": "Add a user",
-        "description": "Add a user to the server.",
-        "operationId": "UserService_AddUser",
+        "summary": "Add a DeInfo",
+        "description": "Add a DeInfo to the server.",
+        "operationId": "DeInfoService_AddDeInfo",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/exampleUser"
+              "$ref": "#/definitions/exampleDeInfo"
             }
           },
           "default": {
@@ -119,28 +39,135 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/exampleAddUserRequest"
+              "$ref": "#/definitions/exampleDeInfo"
             }
           }
         ],
         "tags": [
-          "Users"
+          "DeInfos"
+        ]
+      }
+    },
+    "/api/v1/getdeinfo/{id}": {
+      "get": {
+        "summary": "List DeInfo",
+        "description": "List DeInfo on the server.",
+        "operationId": "DeInfoService_GetDeInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/exampleDeInfo"
+                },
+                "error": {
+                  "$ref": "#/definitions/runtimeStreamError"
+                }
+              },
+              "title": "Stream result of exampleDeInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeInfo"
+        ]
+      }
+    },
+    "/api/v1/listdeinfos": {
+      "get": {
+        "summary": "List DeInfo",
+        "description": "List all DeInfo on the server.",
+        "operationId": "DeInfoService_ListDeInfos",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/exampleDeInfo"
+                },
+                "error": {
+                  "$ref": "#/definitions/runtimeStreamError"
+                }
+              },
+              "title": "Stream result of exampleDeInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "DeInfos"
         ]
       }
     }
   },
   "definitions": {
-    "exampleAddUserRequest": {
-      "type": "object"
+    "exampleAddress": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
     },
-    "exampleUser": {
+    "exampleDeInfo": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "format": "int64"
         },
         "name": {
           "type": "string"
+        },
+        "zoneId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "empStatus": {
+          "type": "string"
+        },
+        "deType": {
+          "type": "string"
+        },
+        "inShift": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "isBicycle": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "adress": {
+          "$ref": "#/definitions/exampleAddress"
         }
       }
     },
